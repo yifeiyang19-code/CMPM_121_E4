@@ -48,6 +48,10 @@
   --screen-radius: 10px;
   --badge-radius: 10px;
   --boss-meter-radius: 2px;
+
+  --pip-width: 22px;
+  --cell-radius: 2px;
+  --stop-dot-size: 12px;
 }
 
 * {
@@ -138,10 +142,15 @@ output {
 }
 
 .pip {
+  width: var(--pip-width);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: currentColor;
   color: var(--pink);
 }
 
 .cell {
+  flex: 1;
+  border-radius: var(--cell-radius);
   color: var(--yellow);
 }
 
@@ -203,6 +212,13 @@ output {
   gap: var(--stop-gap);
   font-size: 12px;
   color: var(--text-dim);
+}
+
+.stop-dot {
+  width: var(--stop-dot-size);
+  height: var(--stop-dot-size);
+  border: 2px solid currentColor;
+  border-radius: 50%;
 }
 
 .stop[data-state="cleared"] {
