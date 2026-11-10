@@ -18,9 +18,11 @@ const RETURN_AT = 18;
 
 export interface RunStats {
   score: number;
+  lives: number;
   kills: number;
   hits: number;
   continues: number;
+  bossDefeated: boolean;
 }
 
 export interface CutsceneData {

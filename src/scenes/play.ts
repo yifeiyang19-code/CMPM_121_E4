@@ -14,6 +14,7 @@ import { play } from "../sounds.ts";
 import { TINTS } from "../textures.ts";
 import { BOSS_NAME, type EnemyKind, SECTORS, type Wave } from "../route.ts";
 import { Backdrop } from "./backdrop.ts";
+import type { RunStats } from "./cutscene.ts";
 import { fadeTo } from "./transition.ts";
 
 const TICK_MS = 1000 / 60;
@@ -75,7 +76,7 @@ export class PlayScene extends Phaser.Scene implements Arena {
   player!: Player;
   now = 0;
   private attract = false;
-  private run;
+  private run!: RunStats;
   private pilot!: Pilot;
   private backdrop!: Backdrop;
   private enemies: ShmupPrefabSprite[] = [];
@@ -109,6 +110,7 @@ export class PlayScene extends Phaser.Scene implements Arena {
       kills: 0,
       hits: 0,
       continues: 0,
+      bossDefeated: false,
     };
     this.enemies = [];
     this.shots = [];
@@ -352,7 +354,7 @@ export class PlayScene extends Phaser.Scene implements Arena {
 
   private hurtPlayer(): void {
     // After the Warden falls, nothing can hurt the ship during the victory lap.
-    if (this.run.bossDefeted || this.gameOver || !this.player.vulnerable) {
+    if (this.run.bossDefeated || this.gameOver || !this.player.vulnerable) {
       return;
     }
     this.run.hits++;
@@ -386,7 +388,6 @@ export class PlayScene extends Phaser.Scene implements Arena {
     this.victoryAt = this.now + VICTORY_TICKS;
     this.hud.setBoss(0);
     this.hud.announce("WARDEN DOWN", "The lanes are open");
-    console.log("victory lap: ship protected =", this.run.bossDefeted);
     // The Warden's fall takes its bullets and escorts with it (no score).
     for (const bullet of this.bullets) {
       this.burst(bullet.x, bullet.y, 2, TINTS.spark);

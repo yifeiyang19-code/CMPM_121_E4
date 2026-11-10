@@ -5,6 +5,8 @@ function aim(from: { x: number; y: number }, arena: Arena): number {
   return Math.atan2(arena.player.y - from.y, arena.player.x - from.x);
 }
 
+export type PowerUpKind = "spread" | "shield";
+
 export interface PrefabDefinition {
   kind: string;
   hp: number;
@@ -212,7 +214,7 @@ export class ShmupBoss extends ShmupPrefabSprite {
 }
 
 export class ShmupPowerUp extends ShmupPrefabSprite {
-  constructor(scene: Phaser.Scene, x: number, y: number, kind) {
+  constructor(scene: Phaser.Scene, x: number, y: number, kind: PowerUpKind) {
     super(
       scene,
       x,

@@ -5,7 +5,10 @@
       "dom",
       "dom.iterable"
     ],
-    "strict": false
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
   "lint": {
     "rules": {
