@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { HEIGHT, WIDTH } from "./actors.ts";
+import { HEIGHT, WIDTH } from "../actors.ts";
 
 /** Parallax space shared by every scene, plus the camera's glow treatment. */
 export class Backdrop {
